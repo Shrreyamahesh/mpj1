@@ -1,0 +1,9 @@
+from dataclasses import dataclass
+from datetime import date
+
+@dataclass
+class Internship:
+    student_name: str
+    domain: str
+    start_date: date
+    end_date: date

@@ -1,0 +1,23 @@
+import unittest
+from datetime import date
+from internship_service import InternshipService
+
+class TestInternshipService(unittest.TestCase):
+    def setUp(self):
+        self.service = InternshipService()
+
+    def test_valid_internship(self):
+        internship = self.service.add_internship("Alice", "AI", date(2025, 6, 1), date(2025, 6, 30))
+        self.assertEqual(internship.student_name, "Alice")
+        self.assertEqual(self.service.get_duration_in_days(internship), 29)
+
+    def test_invalid_date(self):
+        with self.assertRaises(ValueError):
+            self.service.add_internship("Bob", "Web Development", date(2025, 6, 30), date(2025, 6, 1))
+
+    def test_invalid_domain(self):
+        with self.assertRaises(ValueError):
+            self.service.add_internship("Charlie", "Quantum Computing", date(2025, 6, 1), date(2025, 6, 30))
+
+if __name__ == "__main__":
+    unittest.main()

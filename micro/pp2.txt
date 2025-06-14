@@ -1,0 +1,27 @@
+from datetime import date
+from models import Internship
+
+VALID_DOMAINS = {"AI", "Web Development", "Data Science", "Cybersecurity"}
+
+class InternshipService:
+    def __init__(self):
+        self.internships = []
+
+    def validate_dates(self, start: date, end: date):
+        return start < end
+
+    def validate_domain(self, domain: str):
+        return domain in VALID_DOMAINS
+
+    def add_internship(self, student_name, domain, start_date, end_date):
+        if not self.validate_dates(start_date, end_date):
+            raise ValueError("End date must be after start date.")
+        if not self.validate_domain(domain):
+            raise ValueError(f"Invalid domain: {domain}")
+        
+        internship = Internship(student_name, domain, start_date, end_date)
+        self.internships.append(internship)
+        return internship
+
+    def get_duration_in_days(self, internship: Internship):
+        return (internship.end_date - internship.start_date).days

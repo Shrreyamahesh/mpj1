@@ -1,0 +1,32 @@
+import tkinter as tk
+
+root = tk.Tk()
+root.title("Simple Calculator")
+root.geometry("320x400")
+root.configure(bg="#1f1f2e")
+
+entry = tk.Entry(root, width=16, font=('Arial', 24), bd=8, relief='flat', justify='right')
+entry.grid(row=0, column=0, columnspan=4, pady=20, padx=10)
+
+def button_click(symbol):
+    current = entry.get()
+    entry.delete(0, tk.END)
+    entry.insert(0, current + symbol)
+
+def clear():
+    entry.delete(0, tk.END)
+
+def calculate():
+    try:
+        result = eval(entry.get())
+        entry.delete(0, tk.END)
+        entry.insert(0, str(result))
+    except:
+        entry.delete(0, tk.END)
+        entry.insert(0, "Error")
+
+button_config = {
+    "font": ('Arial', 18),
+    "width": 4,
+    "height": 2,
+    "bg
